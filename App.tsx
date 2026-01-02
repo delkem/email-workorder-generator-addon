@@ -30,13 +30,21 @@ const App: React.FC = () => {
   const [showPrintPreview, setShowPrintPreview] = useState(false);
 
   // Simulates the "Fetch Current Email" action of a Gmail Add-on
-  const fetchCurrentEmail = () => {
-    setStatus(ParsingStatus.FETCHING);
+const fetchCurrentEmail = () => {
+  setStatus(ParsingStatus.FETCHING);
+  
+  // Check if we are running inside the real Gmail Add-on context
+  if (window.ACTIVE_EMAIL) {
+    setActiveMessage(window.ACTIVE_EMAIL);
+    setStatus(ParsingStatus.IDLE);
+  } else {
+    // Fallback to mock for local development
     setTimeout(() => {
       setActiveMessage(MOCK_EMAIL);
       setStatus(ParsingStatus.IDLE);
     }, 800);
-  };
+  }
+};
 
   const handleTransform = async () => {
     if (!activeMessage) return;
