@@ -1,0 +1,5 @@
+
+{
+  "name": "WorkOrder Transformer",
+  "description": "Automatically converts customer service request emails into standardized Dynamic Systems internal work order PDFs using AI parsing."
+}
